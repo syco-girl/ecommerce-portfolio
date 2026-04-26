@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxe Shop - Premium E-Commerce</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F9F5F0;
+    --blush: #E8C4B8;
+    --terracotta: #C4714A;
+    --sage: #7D9B76;
+    --warm-brown: #5C3D2E;
+    --soft-gold: #D4A853;
+    --light-sage: #EBF0E8;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--warm-brown);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    padding: 18px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(92,61,46,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--warm-brown);
+    letter-spacing: 2px;
+  }
+
+  .logo span { color: var(--terracotta); }
+
+  .nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--warm-brown);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-icons { display: flex; gap: 20px; align-items: center; }
+
+  .cart-btn {
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  .cart-btn:hover { background: var(--warm-brown); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 85vh;
+    background: linear-gradient(135deg, var(--cream) 0%, #F0E6DC 100%);
+  }
+
+  .hero-left {
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--light-sage);
+    color: var(--sage);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    width: fit-content;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--warm-brown);
+    margin-bottom: 25px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+
+  .hero p {
+    font-size: 16px;
+    color: #8B6F5E;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 420px;
+  }
+
+  .hero-btns { display: flex; gap: 15px; align-items: center; }
+
+  .btn-primary {
+    background: var(--warm-brown);
+    color: white;
+    padding: 16px 35px;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .btn-primary:hover { background: var(--terracotta); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(196,113,74,0.3); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--warm-brown);
+    padding: 16px 35px;
+    border: 2px solid var(--warm-brown);
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover { background: var(--warm-brown); color: white; }
+
+  .hero-right {
+    position: relative;
+    background: linear-gradient(135deg, var(--blush) 0%, #D4A090 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-image-box {
+    width: 320px;
+    height: 420px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.4);
+    position: relative;
+    z-index: 2;
+  }
+
+  .product-emoji { font-size: 100px; margin-bottom: 20px; }
+
+  .hero-badge {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: var(--soft-gold);
+    color: white;
+    padding: 15px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .circle-deco {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .circle-1 { bottom: -60px; left: -60px; }
+  .circle-2 { top: -40px; right: -40px; width: 150px; height: 150px; }
+
+  /* CATEGORIES */
+  .categories {
+    padding: 70px 60px;
+    background: var(--white);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--terracotta);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px;
+    font-weight: 400;
+    color: var(--warm-brown);
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .cat-card {
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .cat-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(92,61,46,0.12); }
+
+  .cat-card:nth-child(1) { background: var(--light-sage); }
+  .cat-card:nth-child(2) { background: #FDF0E8; }
+  .cat-card:nth-child(3) { background: #EEF0F8; }
+  .cat-card:nth-child(4) { background: #FDF5E8; }
+
+  .cat-icon { font-size: 48px; margin-bottom: 15px; }
+
+  .cat-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--warm-brown);
+    margin-bottom: 5px;
+  }
+
+  .cat-card p { font-size: 13px; color: #9B8070; }
+
+  /* PRODUCTS */
+  .products {
+    padding: 70px 60px;
+    background: var(--cream);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(92,61,46,0.12); }
+
+  .product-img {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    position: relative;
+  }
+
+  .product-img:nth-child(1) { background: linear-gradient(135deg, #F0E6DC, #E8C4B8); }
+
+  .p1 { background: linear-gradient(135deg, #EBF0E8, #C8D8C4); }
+  .p2 { background: linear-gradient(135deg, #F0E6DC, #E8C4B8); }
+  .p3 { background: linear-gradient(135deg, #EEF0F8, #C8CDE8); }
+  .p4 { background: linear-gradient(135deg, #FDF5E8, #F0D8A0); }
+  .p5 { background: linear-gradient(135deg, #F8EEF0, #E8C0C8); }
+  .p6 { background: linear-gradient(135deg, #EDF8F0, #B8DCC0); }
+
+  .badge-new {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--sage);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .badge-sale {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--terracotta);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .wishlist-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+
+  .wishlist-btn:hover { transform: scale(1.1); }
+
+  .product-info { padding: 22px; }
+
+  .product-cat {
+    font-size: 11px;
+    color: var(--terracotta);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .product-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--warm-brown);
+    margin-bottom: 8px;
+  }
+
+  .stars { color: var(--soft-gold); font-size: 13px; margin-bottom: 12px; }
+  .stars span { color: #9B8070; font-size: 12px; margin-left: 5px; }
+
+  .price-row { display: flex; justify-content: space-between; align-items: center; }
+
+  .price {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--warm-brown);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .old-price {
+    font-size: 14px;
+    color: #B0A090;
+    text-decoration: line-through;
+    margin-left: 8px;
+  }
+
+  .add-btn {
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .add-btn:hover { background: var(--warm-brown); transform: scale(1.05); }
+
+  /* BANNER */
+  .promo-banner {
+    margin: 0 60px 70px;
+    background: linear-gradient(135deg, var(--warm-brown) 0%, #3D2418 100%);
+    border-radius: 24px;
+    padding: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .promo-banner::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(212,168,83,0.1);
+    right: -80px;
+    top: -80px;
+  }
+
+  .promo-banner::after {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(196,113,74,0.15);
+    left: 30%;
+    bottom: -60px;
+  }
+
+  .promo-text { position: relative; z-index: 2; }
+  .promo-text p { color: var(--soft-gold); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px; }
+
+  .promo-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 20px;
+  }
+
+  .promo-text h2 strong { color: var(--soft-gold); font-weight: 600; }
+
+  .promo-btn {
+    background: var(--soft-gold);
+    color: var(--warm-brown);
+    border: none;
+    padding: 16px 35px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .promo-btn:hover { background: white; transform: translateY(-2px); }
+
+  .promo-emoji { font-size: 120px; position: relative; z-index: 2; }
+
+  /* FOOTER */
+  footer {
+    background: var(--warm-brown);
+    color: rgba(255,255,255,0.8);
+    padding: 50px 60px 30px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    color: white;
+    margin-bottom: 15px;
+  }
+
+  .footer-logo span { color: var(--soft-gold); }
+
+  footer p { font-size: 14px; line-height: 1.7; }
+
+  .footer-col h4 {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+  .footer-col ul li a:hover { color: var(--soft-gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">LUXE<span>.</span>SHOP</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <div class="nav-icons">
+    <span>🔍</span>
+    <span>❤️</span>
+    <button class="cart-btn">🛒 Cart (3)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">✨ New Collection 2025</span>
+    <h1>Discover <em>Luxury</em> Shopping Experience</h1>
+    <p>Explore our curated collection of premium products. From fashion to lifestyle — everything you love, all in one place.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Shop Now →</button>
+      <button class="btn-secondary">View Lookbook</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="circle-deco circle-1"></div>
+    <div class="circle-deco circle-2"></div>
+    <div class="hero-image-box">
+      <div class="product-emoji">👜</div>
+      <p style="color: var(--warm-brown); font-weight:600; font-size:18px; font-family:'Cormorant Garamond',serif;">Premium Collection</p>
+      <p style="color:#9B8070; font-size:13px; margin-top:5px;">Starting from $29.99</p>
+    </div>
+    <div class="hero-badge">UP TO<br>50%<br>OFF</div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <div class="section-header">
+    <p class="section-tag">Browse by Category</p>
+    <h2>What Are You Looking For?</h2>
+  </div>
+  <div class="categories-grid">
+    <div class="cat-card">
+      <div class="cat-icon">👗</div>
+      <h3>Fashion</h3>
+      <p>240+ Products</p>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">💄</div>
+      <h3>Beauty</h3>
+      <p>180+ Products</p>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">🏠</div>
+      <h3>Home Decor</h3>
+      <p>320+ Products</p>
+    </div>
+    <div class="cat-card">
+      <div class="cat-icon">⌚</div>
+      <h3>Accessories</h3>
+      <p>150+ Products</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <div class="section-header">
+    <p class="section-tag">Featured Products</p>
+    <h2>Our Best Sellers</h2>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card">
+      <div class="product-img p1">
+        <span class="badge-new">NEW</span>
+        <button class="wishlist-btn">🤍</button>
+        🌿
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Home & Living</p>
+        <h3>Botanical Candle Set</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(128 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$34.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img p2">
+        <span class="badge-sale">-30%</span>
+        <button class="wishlist-btn">❤️</button>
+        👜
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Fashion</p>
+        <h3>Leather Tote Bag</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(89 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$79.99</span><span class="old-price">$114.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img p3">
+        <span class="badge-new">NEW</span>
+        <button class="wishlist-btn">🤍</button>
+        💄
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Beauty</p>
+        <h3>Glow Serum Collection</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(203 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$49.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img p4">
+        <button class="wishlist-btn">🤍</button>
+        ⌚
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Accessories</p>
+        <h3>Gold Minimal Watch</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(67 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$129.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img p5">
+        <span class="badge-sale">-20%</span>
+        <button class="wishlist-btn">🤍</button>
+        🧴
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Beauty</p>
+        <h3>Rose Clay Face Mask</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(145 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$27.99</span><span class="old-price">$34.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img p6">
+        <span class="badge-new">NEW</span>
+        <button class="wishlist-btn">🤍</button>
+        🪴
+      </div>
+      <div class="product-info">
+        <p class="product-cat">Home Decor</p>
+        <h3>Ceramic Planter Set</h3>
+        <div class="stars">⭐⭐⭐⭐⭐ <span>(92 reviews)</span></div>
+        <div class="price-row">
+          <div><span class="price">$44.99</span></div>
+          <button class="add-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  <div class="promo-text">
+    <p>Limited Time Offer</p>
+    <h2>Get <strong>50% OFF</strong><br>Your First Order!</h2>
+    <button class="promo-btn">Claim Offer Now →</button>
+  </div>
+  <div class="promo-emoji">🎁</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">LUXE<span>.</span>SHOP</div>
+      <p>Your destination for premium lifestyle products. Curated with love, delivered with care.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Best Sellers</a></li>
+        <li><a href="#">Sale Items</a></li>
+        <li><a href="#">Collections</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping Info</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Pinterest</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 LuxeShop. All rights reserved.</p>
+    <p>Designed & Developed by Haseeba K.</p>
+  </div>
+</footer>
+
+</body>
+</html>
